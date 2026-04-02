@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+set -e
+
+# # check if code-server is installed, and then install extensions into specified directory
+# if code-server --disable-telemetry --version; then
+# if [ ! -d "/.vscode/extensions" ]
+#     then
+#        echo "Directory /.vscode/extensions DOES NOT exists."
+#        mkdir -p /.vscode/extensions/
+#        fi
+       
+#        code-server --disable-telemetry --extensions-dir=/.vscode/extensions --install-extension ms-python.python
+#        code-server --disable-telemetry --extensions-dir=/.vscode/extensions --install-extension ms-toolsai.jupyter
+#        else
+#           echo "code-server not found"
+#        fi
+
+
+# ----- INSTALL UPDATED VS CODE ----- #
+# install updated version of code-server
+VERSION=4.100.1
+mkdir /.code-server
+cd /.code-server
+curl -fL "https://github.com/coder/code-server/releases/download/v$VERSION/code-server-$VERSION-linux-amd64.tar.gz" \
+  | tar -xvz
+ln -s /.code-server/code-server-$VERSION-linux-amd64/bin/code-server  /usr/bin/code-server
+cd -
+
+# install any desired extensions
+CODE_EXTENSIONS_DIR=/.vscode/extensions
+if [ ! -d "$CODE_EXTENSIONS_DIR" ]
+    then
+       echo "Directory $CODE_EXTENSIONS_DIR DOES NOT exists."
+       mkdir -p $CODE_EXTENSIONS_DIR
+fi
+# Python, Jupyter, Git Graph, autodocstring extensions, respectively
+# code-server --disable-telemetry --extensions-dir $CODE_EXTENSIONS_DIR --install-extension ms-python.python
+# code-server --disable-telemetry --extensions-dir $CODE_EXTENSIONS_DIR --install-extension ms-toolsai.jupyter
+code-server --disable-telemetry --extensions-dir $CODE_EXTENSIONS_DIR --install-extension mhutchie.git-graph
+code-server --disable-telemetry --extensions-dir $CODE_EXTENSIONS_DIR --install-extension njpwerner.autodocstring
+
+# download and install vscode extension from file
+# for extensions not available in the default open-vsx registry
+
+# run from within a workstation or in postinstall
+# won't work in postinstall if extensions folder has been moved to inside capsule filesystem!
+download_and_install_extension() {
+    publisher=$1
+    name=$2
+    version=$3
+    file=/tmp/$publisher.$name.$version.vsix
+    curl -fL http://${publisher}.gallery.vsassets.io/_apis/public/gallery/publisher/${publisher}/extension/${name}/${version}/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage \
+        --output $file
+    code-server --disable-telemetry --extensions-dir=/.vscode/extensions --install-extension $file
+}
+# comment out as needed:
+# # these versions should be compatible with code-server 4.93.1
+# download_and_install_extension github copilot-chat 0.20.0
+# download_and_install_extension github copilot 1.241.0
+# # for 4.95.1
+# download_and_install_extension github copilot-chat 0.22.1
+# download_and_install_extension github copilot 1.243.0
+# download_and_install_extension MS-vsliveshare vsliveshare 1.0.5900
+# for 4.96.4
+download_and_install_extension github copilot-chat 0.27.3
+download_and_install_extension github copilot 1.326.0
+
+# python/jupyter can be installed using the standard code-server command directly
+# these old versions have working Jedi intellisense in notebooks (with setting "python.languageServer": "Jedi")
+code-server --disable-telemetry --extensions-dir=/.vscode/extensions --install-extension ms-toolsai.jupyter
+code-server --disable-telemetry --extensions-dir=/.vscode/extensions --install-extension ms-python.python
+
+
+# move/link VS Code directory into capsule, so it persists between cloud workstation runs
+# NB: this must be done AFTER the extension installations, otherwise the installed extensions can't be seen by the cloud workstation
+ln -s /root/capsule/code/.vscode/ /.vscode

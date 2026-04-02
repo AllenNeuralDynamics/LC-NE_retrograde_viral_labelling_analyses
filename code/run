@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -euxo pipefail
+cd /code
+pip install -e .
+# This is the master script for the capsule. When you click "Reproducible Run", the code in this file will execute.
+jupyter nbconvert \
+	--to 'html' \
+	--ExecutePreprocessor.timeout=-1 \
+	--FilesWriter.build_directory=../results \
+	--execute notebooks/FINAL_1_csv_compile_df_manually_proofed_Ai65.ipynb
+
+jupyter nbconvert \
+	--to 'html' \
+	--ExecutePreprocessor.timeout=-1 \
+	--FilesWriter.build_directory=../results \
+	--execute notebooks/FINAL_2_manually_proofed_Ai65_plot_counts_densities.ipynb
+	
+jupyter nbconvert \
+	--to 'html' \
+	--ExecutePreprocessor.timeout=-1 \
+	--FilesWriter.build_directory=../results \
+	--execute notebooks/FINAL_3_manually_proofed_Ai65_3Dplot_somata_positions_byROI.ipynb
+
+jupyter nbconvert \
+	--to 'html' \
+	--ExecutePreprocessor.timeout=-1 \
+	--FilesWriter.build_directory=../results \
+	--execute notebooks/FINAL_4_manually_proofed_Ai65_stats_regression.ipynb
+
+jupyter nbconvert \
+	--to 'html' \
+	--ExecutePreprocessor.timeout=-1 \
+	--FilesWriter.build_directory=../results \
+	--execute notebooks/FINAL_5_manually_proofed_AI65_meshes_plots_H2B-LC.ipynb
+
+jupyter nbconvert \
+	--to 'html' \
+	--ExecutePreprocessor.timeout=-1 \
+	--FilesWriter.build_directory=../results \
+	--execute notebooks/H2B-LC_meshes_MAPseq_data.ipynb
