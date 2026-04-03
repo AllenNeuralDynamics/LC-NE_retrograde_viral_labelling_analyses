@@ -1,5 +1,7 @@
 metadata_version: 1
 name: PK_Viral tracing analysis_for_release
-description: Basic structure of a capsule to be customized as needed.
+description: Retrograde labelling analyses for LC-NE manuscript for brains processed
+  through smartSPIM pipeline for Dbh-Cre;AI65 animals receiving retrograde Cre-dependent
+  FlpO injections into OLF, CTX, TH, MB, CB or SP.
 authors:
-- name: AIND
+- name: Polina Kosillo
