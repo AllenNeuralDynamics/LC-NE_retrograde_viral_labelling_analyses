@@ -1,0 +1,33 @@
+{
+	"version": 1,
+	"attached_datasets": [
+		{
+			"id": "0fadf46e-9cae-4618-9f8a-6e086af808fb",
+			"mount": "ccf_2017_obj"
+		},
+		{
+			"id": "1a3f0210-7f17-4c86-9ae4-e3aaea7fd5b5",
+			"mount": "LC_reconstruction_somas"
+		},
+		{
+			"id": "3aa9d038-9060-4759-af19-829ed8fe37f0",
+			"mount": "LC_points_from_cajal"
+		},
+		{
+			"id": "7baf6210-8c65-4d56-aefe-8752d016a38d",
+			"mount": "manually_proofed_Ai65_classifier"
+		},
+		{
+			"id": "a5982495-cb11-4829-aee2-f990c928c2b6",
+			"mount": "Dbh-CreAi65_retrograde_soma_manual_proofread_10-14-25"
+		},
+		{
+			"id": "c712751d-f744-4fe8-9657-93a7084eab22",
+			"mount": "LC_percentile_meshes"
+		},
+		{
+			"id": "dd3204b2-28d2-413d-a2ba-dcd9d1ab613c",
+			"mount": "PK_MAPseqBARseq_LC-NEpaper_files"
+		}
+	]
+}
