@@ -4,9 +4,9 @@ FROM $REGISTRY_HOST/codeocean/py-r:python3.10.12-R4.2.3-IRkernel-ubuntu22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG GIT_ASK-PASS
+ARG GIT_ASKPASS
 ARG GIT_ACCESS_TOKEN
-COPY git-askpass /
+COPY git-ask-pass /
 
 RUN pip install -U --no-cache-dir \
     allensdk==2.16.2 \
