@@ -16,3 +16,7 @@ pip install -e .
 ### Notes
 
  - [Tutorial for ccf interaction](https://allensdk.readthedocs.io/en/latest/_static/examples/nb/reference_space.html)
+
+ ### Links
+ GitHub: https://github.com/AllenNeuralDynamics/LC-NE_retrograde_viral_labelling_analyses
+ CodeOcean: TBD
