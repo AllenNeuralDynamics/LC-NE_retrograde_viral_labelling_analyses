@@ -10,10 +10,6 @@
 			"mount": "LC_reconstruction_somas"
 		},
 		{
-			"id": "3aa9d038-9060-4759-af19-829ed8fe37f0",
-			"mount": "LC_points_from_cajal"
-		},
-		{
 			"id": "7baf6210-8c65-4d56-aefe-8752d016a38d",
 			"mount": "manually_proofed_Ai65_classifier"
 		},
