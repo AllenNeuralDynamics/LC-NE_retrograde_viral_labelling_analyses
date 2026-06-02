@@ -429,7 +429,7 @@ class CCFMesh:
 
     @staticmethod
     def get_mesh_from_id(allen_id):
-        obj_dir = "/data/ccf_2017_obj"
+        obj_dir = "/data/.brainglobe/allen_mouse_25um_v1.2/meshes"
         obj_path = os.path.join(obj_dir, f"{allen_id}.obj")
         return CCFMesh.load_obj(obj_path)
 
