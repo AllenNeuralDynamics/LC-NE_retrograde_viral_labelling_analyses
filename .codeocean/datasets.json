@@ -2,10 +2,6 @@
 	"version": 1,
 	"attached_datasets": [
 		{
-			"id": "0fadf46e-9cae-4618-9f8a-6e086af808fb",
-			"mount": "ccf_2017_obj"
-		},
-		{
 			"id": "1a3f0210-7f17-4c86-9ae4-e3aaea7fd5b5",
 			"mount": "LC_reconstruction_somas"
 		},
