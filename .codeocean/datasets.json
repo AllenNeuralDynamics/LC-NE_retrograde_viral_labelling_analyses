@@ -6,10 +6,6 @@
 			"mount": "LC_reconstruction_somas"
 		},
 		{
-			"id": "7baf6210-8c65-4d56-aefe-8752d016a38d",
-			"mount": "manually_proofed_Ai65_classifier"
-		},
-		{
 			"id": "a5982495-cb11-4829-aee2-f990c928c2b6",
 			"mount": "Dbh-CreAi65_retrograde_soma_manual_proofread_10-14-25"
 		},
