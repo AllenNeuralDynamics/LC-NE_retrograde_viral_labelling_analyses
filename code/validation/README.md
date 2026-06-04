@@ -58,12 +58,15 @@ validator. A failing validator does not abort the run (you get every report);
 the run exits non-zero at the end if anything diverged. Reports land in
 `/results/validation/*_report.md`.
 
-**Focused single-notebook iteration** (the fast path for short work windows):
+**Focused single-notebook iteration** (the fast path for short work windows).
+Run from the code dir (`/root/capsule/code` in a workstation terminal):
 
 ```bash
+pip install -e .          # install the local `vta` pkg (the Reproducible Run
+                          # does this; a standalone run needs it or imports fail)
 # run just the notebook you're working on, then validate only its outputs
 jupyter nbconvert --to html --execute --ExecutePreprocessor.timeout=-1 \
-    --FilesWriter.build_directory=../results notebooks/FINAL_4_...ipynb
+    --FilesWriter.build_directory=/results notebooks/FINAL_4_...ipynb
 python validation/validate_nb4.py
 ```
 
