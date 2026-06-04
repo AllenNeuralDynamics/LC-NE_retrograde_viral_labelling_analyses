@@ -39,7 +39,7 @@ EXPECTED_KEYS = {
 }
 
 
-def describe(obj, name: str = "results") -> None:
+def describe(obj) -> None:
     """Print a structural summary of the unpickled object."""
     print(f"\n{'=' * 70}\nPICKLE STRUCTURE\n{'=' * 70}")
     print(f"top-level type: {type(obj)}")
