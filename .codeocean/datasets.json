@@ -6,12 +6,12 @@
 			"mount": "LC_reconstruction_somas"
 		},
 		{
-			"id": "7baf6210-8c65-4d56-aefe-8752d016a38d",
-			"mount": "manually_proofed_Ai65_classifier"
-		},
-		{
 			"id": "a5982495-cb11-4829-aee2-f990c928c2b6",
 			"mount": "Dbh-CreAi65_retrograde_soma_manual_proofread_10-14-25"
+		},
+		{
+			"id": "b4a31cdc-daea-445b-b291-b0088daf9de4",
+			"mount": "LC-NE_retrograde_viral_labelling_analyses_frozen_v1_release_result"
 		},
 		{
 			"id": "c712751d-f744-4fe8-9657-93a7084eab22",
