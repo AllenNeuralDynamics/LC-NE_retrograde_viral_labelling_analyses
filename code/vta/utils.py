@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from allensdk.core.reference_space_cache import ReferenceSpaceCache
+from brainglobe_atlasapi import BrainGlobeAtlas
 from dask import array as da
 from scipy import ndimage
 import os
@@ -352,44 +352,29 @@ class Brain:
 
 class CCF:
     """
-    A class to handle Common Coordinate Framework (CCF) operations.
+    Common Coordinate Framework (CCF) region lookup.
+
+    Exposes the voxel `resolution` and a region-id -> acronym map
+    (`acronymMap`), sourced from the brainglobe `allen_mouse_25um` atlas -- the
+    same atlas the region meshes come from (see `CCFMesh`). The atlas is read
+    from the mounted `.brainglobe` data asset (`brainglobe_dir`), so nothing is
+    downloaded at run time. See the README for how to obtain the atlas if that
+    asset is unavailable.
     """
 
-    def __init__(
-        self,
-        resolution=25,
-        reference_space_key="annotation/ccf_2017",
-        output_dir="/results/",
-    ):
+    def __init__(self, resolution=25, brainglobe_dir="/data/.brainglobe"):
         self.resolution = resolution
-        self.reference_space_key = reference_space_key
-        self.rspc = ReferenceSpaceCache(
-            self.resolution,
-            self.reference_space_key,
-            manifest=Path(output_dir) / "manifest.json",
+        atlas = BrainGlobeAtlas(
+            f"allen_mouse_{resolution}um",
+            brainglobe_dir=brainglobe_dir,
+            check_latest=False,  # use the mounted atlas; do not hit the network
         )
-        self.annot, self.annot_info = self.rspc.get_annotation_volume()
-        self.structure_tree = self.rspc.get_structure_tree()
-        self.rsp = self.rspc.get_reference_space()
-
-        # Set up CCF structure lookup dicts
-        idMap = self.structure_tree.get_id_acronym_map()
-        self.acronymMap = {IDs: acronym for acronym, IDs in idMap.items()}  # invert idMap
-        return
+        # lookup_df columns: acronym, id, name -> map region id to acronym
+        self.acronymMap = dict(zip(atlas.lookup_df["id"], atlas.lookup_df["acronym"]))
 
     def __str__(self):
         prop_list = [prop for prop in dir(self) if not prop.startswith("__")]
-        out = "\n".join(prop_list)
-        return f"ccf has properties:\n" + out
-
-    def get_roi_mask(self, roi_list=["LC"], mask_dilate_iterations=10):
-        roi_map = self.structure_tree.get_id_acronym_map()
-        id_list = [roi_map[roi] for roi in roi_list]
-        roi_mask = self.rsp.make_structure_mask(id_list).astype("bool")  # in shape AP, DV, ML
-        roi_mask = ndimage.binary_dilation(
-            roi_mask, iterations=mask_dilate_iterations
-        )  # dilate LC annotation by 10 iterations * 25 um = 250 um
-        return roi_mask
+        return "ccf has properties:\n" + "\n".join(prop_list)
 
 
 class CCFMesh:

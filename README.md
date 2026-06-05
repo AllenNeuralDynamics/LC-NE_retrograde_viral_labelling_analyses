@@ -36,13 +36,25 @@ jupyter nbconvert --to html --execute --ExecutePreprocessor.timeout=-1 \
 | Mount path | Used by | Contents |
 |------------|---------|----------|
 | `/data/Dbh-CreAi65_retrograde_soma_manual_proofread_10-14-25/final_results/{brain_id}_registered_pts.csv` | NB 1 | Per-brain manually-proofread, CCF-registered soma coordinates. Columns are loaded as `x, y, z, Location`; only rows with `Location == "inside"` are kept which denotes somata segmented within the PONS CCF mesh, rather than spurios cells detected elsewhere in the specimen. |
-| `/data/ccf_2017_obj/` | NB 2–6 (via `vta.utils.CCF` / `CCFMesh`) | Allen CCF 2017 region meshes |
+| `/data/.brainglobe/allen_mouse_25um_v1.2/` | NB 2–6 (via `vta.utils.CCF` / `CCFMesh`) | brainglobe `allen_mouse_25um` atlas: region meshes (`CCFMesh`) and the region-id↔acronym lookup (`CCF`). See note below. |
 | `/data/LC_percentile_meshes_1/percentile_{10..90}.obj`, `new_core_mesh.obj` | NB 5, 6 | LC density-percentile shell meshes generated from Dbh-Cre;H2B-GFP animals and defining anatomically and functionally correct LC location within the CCF|
 | `/data/LC_reconstruction_somas/LC reconstruction soma location and top projection.csv` | NB 5 | ExA-SPIM single-neuron reconstruction soma locations organized by top projection target |
 | `/data/PK_MAPseqBARseq_LC-NEpaper_files/MAPseq_combined_cell_top_projections_with_coords.csv` | NB 6 | MAPseq cell coordinates + top projection labels |
 | `/data/PK_MAPseqBARseq_LC-NEpaper_files/fromLCNE_combined_LCcluster_neurons_BARseq.csv` | NB 6 | BARseq cell coordinates + cluster labels |
 | `/data/PK_MAPseqBARseq_LC-NEpaper_files/Dbh_Th_Slc18a2_logcounts_adj_Dbh.csv` | NB 6 | Per-cell log-counts for `Dbh`, `Th`, `Slc18a2` used for gene-expression overlays |
 | `/data/manually_proofed_Ai65_classifier/gp_classification_results.pkl` | NB 4 | Pre-trained Gaussian-process classifier results; if present it is loaded, otherwise NB 4 retrains and writes a new one |
+
+> **The `.brainglobe` asset** is the public brainglobe
+> [`allen_mouse_25um`](https://brainglobe.info/documentation/brainglobe-atlasapi/usage/atlas-details.html)
+> atlas (v1.2). The code reads it from the mounted asset
+> (`brainglobe_dir="/data/.brainglobe"`), so nothing is downloaded during a run.
+> If the asset is ever unavailable, the same atlas can be fetched directly with
+> `brainglobe-atlasapi`:
+>
+> ```python
+> from brainglobe_atlasapi import BrainGlobeAtlas
+> BrainGlobeAtlas("allen_mouse_25um")  # downloads to ~/.brainglobe
+> ```
 
 ## 3. Outputs (`/results/`)
 
@@ -84,11 +96,12 @@ Written by the notebooks themselves:
 ## 6. Environment
 
 Built from [Dockerfile](Dockerfile) on
-`codeocean/py-r:python3.10.12-R4.2.3-IRkernel-ubuntu22.04`. Pinned scientific
-stack: `allensdk==2.16.2`, `antspyx==0.4.2`, `dask==2023.5.0`,
-`opencv-python-headless==4.8.0.74`, `zarr==2.14.2`. Additional (unpinned):
-`pandas`, `scikit-learn`, `seaborn`, `rich`, `tqdm`, `timebudget`, `ruff`,
-`k3d`, `trimesh`, `rtree`, `openpyxl`, `matplotlib-venn`.
+`codeocean/py-r:python3.10.12-R4.2.3-IRkernel-ubuntu22.04`. Every package the
+code imports is pinned in the Dockerfile (top-level pins only; transitive
+dependencies are left to the resolver): `brainglobe-atlasapi`, `dask`,
+`ipywidgets`, `k3d`, `matplotlib`, `numpy`, `pandas`, `plotly`, `rtree`, `ruff`,
+`scikit-learn`, `scipy`, `seaborn`, `trimesh`. The CCF region lookup uses
+`brainglobe-atlasapi` (reading the `.brainglobe` atlas), not allensdk.
 
 The local package **`vta`** (providing `vta.utils.CCF` and `vta.utils.CCFMesh`)
 is installed in editable mode by [run](run):
