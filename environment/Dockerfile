@@ -8,16 +8,11 @@ ARG GIT_ASKPASS
 ARG GIT_ACCESS_TOKEN
 COPY git-ask-pass /
 
-# Packages the code actually imports, pinned to the versions the v1 release ran
-# under. Transitive dependencies are left to the resolver (top-level pins only).
-# The CCF region lookup uses brainglobe-atlasapi (reading the mounted .brainglobe
-# atlas) instead of allensdk -- dropping allensdk also removes its stale
-# pandas==1.5.3 pin, so this is a single resolution again.
-#
-# TODO: brainglobe-atlasapi is unpinned until the first clean build resolves a
-# version compatible with numpy==1.23.5; pin it to that version afterward.
+# Packages the code imports, pinned to specific versions. Transitive
+# dependencies are left to the resolver (top-level pins only). The CCF region
+# lookup uses brainglobe-atlasapi, reading the mounted .brainglobe atlas.
 RUN pip install --no-cache-dir \
-    brainglobe-atlasapi \
+    brainglobe-atlasapi==2.1.0 \
     dask==2023.5.0 \
     ipywidgets==8.0.7 \
     k3d==2.17.0 \

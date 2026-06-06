@@ -12,9 +12,8 @@ Design (playbook §5):
     per-column drilldowns when something differs.
   * PDF/SVG/HTML are NOT byte-compared (timestamps, fonts, anti-aliasing make it
     useless) -- only presence + non-trivial size are checked.
-  * CCF download artifacts (annotation/, manifest.json, structures.json) and the
-    run log (`output`) are skipped by design -- they are allensdk byproducts /
-    bookkeeping, not scientific results.
+  * The run log (`output`) is skipped by design -- bookkeeping, not a
+    scientific result.
 
 Paths are overridable via env vars so the scripts can be pointed at local
 fixtures for testing:

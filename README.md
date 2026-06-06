@@ -101,7 +101,7 @@ code imports is pinned in the Dockerfile (top-level pins only; transitive
 dependencies are left to the resolver): `brainglobe-atlasapi`, `dask`,
 `ipywidgets`, `k3d`, `matplotlib`, `numpy`, `pandas`, `plotly`, `rtree`, `ruff`,
 `scikit-learn`, `scipy`, `seaborn`, `trimesh`. The CCF region lookup uses
-`brainglobe-atlasapi` (reading the `.brainglobe` atlas), not allensdk.
+`brainglobe-atlasapi`, reading the `.brainglobe` atlas.
 
 The local package **`vta`** (providing `vta.utils.CCF` and `vta.utils.CCFMesh`)
 is installed in editable mode by [run](run):
@@ -118,7 +118,7 @@ VSIX, etc.) is handled by [postInstall](postInstall).
 
 ### Notes
 
- - [Tutorial for ccf interaction](https://allensdk.readthedocs.io/en/latest/_static/examples/nb/reference_space.html)
+ - [brainglobe-atlasapi documentation](https://brainglobe.info/documentation/brainglobe-atlasapi/index.html)
 
  ### Links
  GitHub: https://github.com/AllenNeuralDynamics/LC-NE_retrograde_viral_labelling_analyses

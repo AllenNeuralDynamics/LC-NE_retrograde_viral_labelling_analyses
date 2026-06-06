@@ -47,9 +47,8 @@ FROZEN_REF_DIR=/some/ref  RESULTS_DIR=/some/results  python validation/validate_
   emit machine-checkable data.** To get true data-level validation on the figure
   notebooks, they would need to also write the plotted numbers as CSVs — a worthwhile
   future enhancement (it also helps publication-standards / figure-source provenance).
-- **Skipped by design:** `annotation/`, `manifest.json`, `structures.json` (allensdk
-  CCF-download byproducts, not scientific results), `output` (the run log), and
-  the six `nbconvert` HTML renders (huge, embedded images, non-deterministic).
+- **Skipped by design:** `output` (the run log) and the six `nbconvert` HTML
+  renders (huge, embedded images, non-deterministic).
 
 ## Workflows
 
