@@ -8,26 +8,24 @@ ARG GIT_ASKPASS
 ARG GIT_ACCESS_TOKEN
 COPY git-ask-pass /
 
-RUN pip install -U --no-cache-dir \
-    allensdk==2.16.2 \
-    antspyx==0.4.2 \
+# Packages the code imports, pinned to specific versions. Transitive
+# dependencies are left to the resolver (top-level pins only). The CCF region
+# lookup uses brainglobe-atlasapi, reading the mounted .brainglobe atlas.
+RUN pip install --no-cache-dir \
+    brainglobe-atlasapi==2.1.0 \
     dask==2023.5.0 \
-    opencv-python-headless==4.8.0.74 \
-    zarr==2.14.2
-
-RUN pip install -U --no-cache-dir \
-    pandas \
-    scikit-learn \
-    seaborn \
-    rich \
-    tqdm \
-    timebudget \
-    ruff \
-    k3d \
-    trimesh \
-    rtree \
-    openpyxl \
-    matplotlib-venn
+    ipywidgets==8.0.7 \
+    k3d==2.17.0 \
+    matplotlib==3.7.2 \
+    numpy==1.23.5 \
+    pandas==2.3.3 \
+    plotly==6.6.0 \
+    rtree==1.4.1 \
+    ruff==0.15.9 \
+    scikit-learn==1.7.2 \
+    scipy==1.10.1 \
+    seaborn==0.13.2 \
+    trimesh==4.11.5
 
 COPY postInstall /
 RUN /postInstall
