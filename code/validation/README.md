@@ -61,9 +61,9 @@ the run exits non-zero at the end if anything diverged. Reports land in
 Run from the code dir (`/root/capsule/code` in a workstation terminal):
 
 ```bash
-pip install -e .          # install the local `vta` pkg (the Reproducible Run
-                          # does this; a standalone run needs it or imports fail)
-# run just the notebook you're working on, then validate only its outputs
+# run just the notebook you're working on, then validate only its outputs.
+# No install step: the notebooks import `ccf_utils`, which sits beside them in
+# notebooks/, so a plain import resolves under nbconvert.
 jupyter nbconvert --to html --execute --ExecutePreprocessor.timeout=-1 \
     --FilesWriter.build_directory=/results notebooks/FINAL_4_...ipynb
 python validation/validate_nb4.py
@@ -87,9 +87,8 @@ mkdir -p /results
 cp "/data/LC-NE_retrograde_viral_labelling_analyses_frozen_v1_release_result/FINAL_manual_proofread_ccf_37brains.csv" /results/
 ```
 
-Also note: NB2–NB6 instantiate `vta.utils.CCF`, which currently **downloads** the
-CCF annotation from the Allen API into `/results/` on each run (slow; see
-RECON.md §4a). That cost is paid on every standalone run until it's fixed.
+Also note: NB2–NB6 instantiate `ccf_utils.CCF`, which reads the CCF atlas from
+the mounted `.brainglobe` data asset — no network access or download at run time.
 
 And remember the Code Ocean gotcha: launching an interactive terminal **wipes
-`/results/`** — re-seed the NB1 CSV (and expect a CCF re-download) after doing so.
+`/results/`** — re-seed the NB1 CSV after doing so.

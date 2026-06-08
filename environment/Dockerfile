@@ -13,7 +13,6 @@ COPY git-ask-pass /
 # lookup uses brainglobe-atlasapi, reading the mounted .brainglobe atlas.
 RUN pip install --no-cache-dir \
     brainglobe-atlasapi==2.1.0 \
-    dask==2023.5.0 \
     ipywidgets==8.0.7 \
     k3d==2.17.0 \
     matplotlib==3.7.2 \
