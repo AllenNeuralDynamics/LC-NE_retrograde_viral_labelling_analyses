@@ -1,6 +1,6 @@
 # hash:sha256:265e7b5f6f18c9a43343ac74f7d1afa0c3158ee63782671f4237c0e6314302fa
 ARG REGISTRY_HOST
-FROM $REGISTRY_HOST/codeocean/py-r:python3.10.12-R4.2.3-IRkernel-ubuntu22.04
+FROM $REGISTRY_HOST/codeocean/mambaforge3:23.1.0-4-python3.10.12-ubuntu22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
