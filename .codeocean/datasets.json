@@ -6,6 +6,10 @@
 			"mount": "LC_reconstruction_somas"
 		},
 		{
+			"id": "95033a61-87ec-43ab-89d2-1913199be175",
+			"mount": "BARseq-MAPseq-LC-NE-combined_2026-06-16_02-35-09"
+		},
+		{
 			"id": "a5982495-cb11-4829-aee2-f990c928c2b6",
 			"mount": "Dbh-CreAi65_retrograde_soma_manual_proofread_10-14-25"
 		},
@@ -16,10 +20,6 @@
 		{
 			"id": "c712751d-f744-4fe8-9657-93a7084eab22",
 			"mount": "LC_percentile_meshes_1"
-		},
-		{
-			"id": "dd3204b2-28d2-413d-a2ba-dcd9d1ab613c",
-			"mount": "BARseq-MAPseq-LC-NE-combined_2026-06-16_02-35-09"
 		},
 		{
 			"id": "fdd6dcbf-0917-4349-ae18-20f687b0089c",
