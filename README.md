@@ -39,9 +39,9 @@ jupyter nbconvert --to html --execute --ExecutePreprocessor.timeout=-1 \
 | `/data/.brainglobe/allen_mouse_25um_v1.2/` | NB 2–6 (via `vta.utils.CCF` / `CCFMesh`) | brainglobe `allen_mouse_25um` atlas: region meshes (`CCFMesh`) and the region-id↔acronym lookup (`CCF`). See note below. |
 | `/data/LC_percentile_meshes_1/percentile_{10..90}.obj`, `new_core_mesh.obj` | NB 5, 6 | LC density-percentile shell meshes generated from Dbh-Cre;H2B-GFP animals and defining anatomically and functionally correct LC location within the CCF|
 | `/data/LC_reconstruction_somas/LC reconstruction soma location and top projection.csv` | NB 5 | ExA-SPIM single-neuron reconstruction soma locations organized by top projection target |
-| `/data/temp_lc_paper_barseq_mapseq_output/other_results/BARseq_780345-780346_combined/cell_top_projections_with_coords.csv` | NB 6 | MAPseq cell coordinates + top projection labels |
-| `/data/temp_lc_paper_barseq_mapseq_output/other_results/BARseq_780345-780346_combined/fromLCNE_combined_LCcluster_neurons_CCFv2_uid_cpm_log_clust_colData.csv` | NB 6 | BARseq cell coordinates + cluster labels |
-| `/data/temp_lc_paper_barseq_mapseq_output/other_results/BARseq_780345-780346_combined/Dbh_Th_Slc18a2_logcounts_adj_Dbh.csv` | NB 6 | Per-cell log-counts for `Dbh`, `Th`, `Slc18a2` used for gene-expression overlays |
+| `/data/BARseq-MAPseq-LC-NE-combined_2026-06-17_03-12-50/other_results/BARseq_780345-780346_combined/cell_top_projections_with_coords.csv` | NB 6 | MAPseq cell coordinates + top projection labels |
+| `/data/BARseq-MAPseq-LC-NE-combined_2026-06-17_03-12-50/other_results/BARseq_780345-780346_combined/fromLCNE_combined_LCcluster_neurons_CCFv2_uid_cpm_log_clust_colData.csv` | NB 6 | BARseq cell coordinates + cluster labels |
+| `/data/BARseq-MAPseq-LC-NE-combined_2026-06-17_03-12-50/other_results/BARseq_780345-780346_combined/Dbh_Th_Slc18a2_logcounts_adj_Dbh.csv` | NB 6 | Per-cell log-counts for `Dbh`, `Th`, `Slc18a2` used for gene-expression overlays |
 | `/data/manually_proofed_Ai65_classifier/gp_classification_results.pkl` | NB 4 | Pre-trained Gaussian-process classifier results; if present it is loaded, otherwise NB 4 retrains and writes a new one |
 
 > **The `.brainglobe` asset** is the public brainglobe
