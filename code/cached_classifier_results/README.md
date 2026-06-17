@@ -15,8 +15,8 @@ and a per-cell uncertainty.
 
 We deliberately store these **applied results** rather than the trained model.
 The fitted GP is large and its serialized form is tied to specific library
-versions, whereas this CSV is small, human-readable, and version-independent —
-and the model is never re-invoked downstream (only these outputs are used).
+versions, whereas this CSV is small, human-readable, and version-independent.
+The model itself is never re-invoked downstream (only these outputs are used).
 
 ## Columns (one row per ipsilateral soma)
 
@@ -44,10 +44,10 @@ retrain branch doubles as the recipe for how this file is produced. Leave it
 `True` for normal runs.
 
 Note: a regenerated file reproduces the same *methodology*, but its values need
-not match this file exactly — GP fitting is not bit-reproducible across library
+not match this file exactly. GP fitting is not bit-reproducible across library
 versions (which is why the results are cached). The committed CSV is the
 authoritative frozen version.
 
-> Provenance: the initial CSV was a one-time extraction from a model pickle (the
-> `manually_proofed_Ai65_classifier` data asset) cached by an earlier run; see
-> git history for that migration.
+Provenance: the initial CSV was a one-time extraction from a model pickle 
+(the `manually_proofed_Ai65_classifier` data asset) cached by an earlier run. 
+See git history for that migration.
