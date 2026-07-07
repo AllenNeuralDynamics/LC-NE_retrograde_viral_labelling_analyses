@@ -2,10 +2,6 @@
 	"version": 1,
 	"attached_datasets": [
 		{
-			"id": "1a3f0210-7f17-4c86-9ae4-e3aaea7fd5b5",
-			"mount": "LC_reconstruction_somas"
-		},
-		{
 			"id": "32b50e14-234c-434e-a9de-47c25571bc85",
 			"mount": "BARseq-MAPseq-LC-NE-combined_2026-06-17_03-12-50"
 		},

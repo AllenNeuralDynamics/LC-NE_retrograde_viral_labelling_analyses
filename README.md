@@ -20,13 +20,12 @@ HTML in `/results`:
 | 2 | [FINAL_2_manually_proofed_Ai65_plot_counts_densities.ipynb](FINAL_2_manually_proofed_Ai65_plot_counts_densities.ipynb) | Per-region / per-hemisphere LC-NE cell counts and density plots |
 | 3 | [FINAL_3_manually_proofed_Ai65_3Dplot_somata_positions_byROI.ipynb](FINAL_3_manually_proofed_Ai65_3Dplot_somata_positions_byROI.ipynb) | Interactive 3D `k3d` plots of soma positions in CCF, coloured by injection ROI | Currently NOT USED for the figures included in the manuscript|
 | 4 | [FINAL_4_manually_proofed_Ai65_stats_regression.ipynb](FINAL_4_manually_proofed_Ai65_stats_regression.ipynb) | PCA, LDA, logistic-regression / random-forest / Gaussian-process classifiers, pairwise post-hoc statistics | Currently NOT USED for the figures included in the manuscript|
-| 5 | [FINAL_5_manually_proofed_AI65_meshes_plots_H2B-LC.ipynb](FINAL_5_manually_proofed_AI65_meshes_plots_H2B-LC.ipynb) | Coronal/sagittal projections of retro somata and ExA-SPIM-reconstructed somata over LC percentile-density meshes | Input data is extracted from outputs of the ExA-SPIM processing capsule |
+| 5 | [FINAL_5_manually_proofed_AI65_meshes_plots_H2B-LC.ipynb](FINAL_5_manually_proofed_AI65_meshes_plots_H2B-LC.ipynb) | Coronal/sagittal projections of retrogradely labelled somata  somata over LC percentile-density meshes | 
 | 6 | [H2B-LC_meshes_MAPseq_data.ipynb](H2B-LC_meshes_MAPseq_data.ipynb) | Same mesh framework applied to MAPseq and BARseq soma coordinates, plus per-gene (Dbh / Th / Slc18a2) expression overlays | Input data is extracted from outputs of the LC-NE_BARseq_MAPseq_analyses capsule |
 
 The reproducible run is driven by [run](run):
 
 ```bash
-cd /code && pip install -e .
 jupyter nbconvert --to html --execute --ExecutePreprocessor.timeout=-1 \
     --FilesWriter.build_directory=../results notebooks/<each notebook>.ipynb
 ```
@@ -38,7 +37,6 @@ jupyter nbconvert --to html --execute --ExecutePreprocessor.timeout=-1 \
 | `/data/Dbh-CreAi65_retrograde_soma_manual_proofread_10-14-25/final_results/{brain_id}_registered_pts.csv` | NB 1 | Per-brain manually-proofread, CCF-registered soma coordinates. Columns are loaded as `x, y, z, Location`; only rows with `Location == "inside"` are kept which denotes somata segmented within the PONS CCF mesh, rather than spurios cells detected elsewhere in the specimen. |
 | `/data/.brainglobe/allen_mouse_25um_v1.2/` | NB 2–6 (via `vta.utils.CCF` / `CCFMesh`) | brainglobe `allen_mouse_25um` atlas: region meshes (`CCFMesh`) and the region-id↔acronym lookup (`CCF`). See note below. |
 | `/data/LC_percentile_meshes_1/percentile_{10..90}.obj`, `new_core_mesh.obj` | NB 5, 6 | LC density-percentile shell meshes generated from Dbh-Cre;H2B-GFP animals and defining anatomically and functionally correct LC location within the CCF|
-| `/data/LC_reconstruction_somas/LC reconstruction soma location and top projection.csv` | NB 5 | ExA-SPIM single-neuron reconstruction soma locations organized by top projection target |
 | `/data/BARseq-MAPseq-LC-NE-combined_2026-06-17_03-12-50/other_results/BARseq_780345-780346_combined/cell_top_projections_with_coords.csv` | NB 6 | MAPseq cell coordinates + top projection labels |
 | `/data/BARseq-MAPseq-LC-NE-combined_2026-06-17_03-12-50/other_results/BARseq_780345-780346_combined/fromLCNE_combined_LCcluster_neurons_CCFv2_uid_cpm_log_clust_colData.csv` | NB 6 | BARseq cell coordinates + cluster labels |
 | `/data/BARseq-MAPseq-LC-NE-combined_2026-06-17_03-12-50/other_results/BARseq_780345-780346_combined/Dbh_Th_Slc18a2_logcounts_adj_Dbh.csv` | NB 6 | Per-cell log-counts for `Dbh`, `Th`, `Slc18a2` used for gene-expression overlays |
@@ -63,7 +61,7 @@ Written by the notebooks themselves:
 - `FINAL_manual_proofread_ccf_37brains.csv` — unified soma table (NB 1).
 - `pairwise_posthoc_results.csv` — pairwise post-hoc statistical comparisons (NB 4).
 - `plots/` — PDF + SVG figures from NB 2, 5, 6 (counts/density bar plots,
-  coronal/sagittal mesh overlays for retro, ExA-SPIM, MAPseq, BARseq, and
+  coronal/sagittal mesh overlays for retro, MAPseq, BARseq, and
   per-gene expression plots) and the random-forest confusion-matrix figures
   from NB 4.
 - One HTML rendering per notebook (produced by `jupyter nbconvert` in
@@ -102,14 +100,6 @@ dependencies are left to the resolver): `brainglobe-atlasapi`, `dask`,
 `ipywidgets`, `k3d`, `matplotlib`, `numpy`, `pandas`, `plotly`, `rtree`, `ruff`,
 `scikit-learn`, `scipy`, `seaborn`, `trimesh`. The CCF region lookup uses
 `brainglobe-atlasapi`, reading the `.brainglobe` atlas.
-
-The local package **`vta`** (providing `vta.utils.CCF` and `vta.utils.CCFMesh`)
-is installed in editable mode by [run](run):
-
-```bash
-cd /code
-pip install -e .
-```
 
 VS Code / code-server set-up for the cloud workstation (extensions, Copilot
 VSIX, etc.) is handled by [postInstall](postInstall).
