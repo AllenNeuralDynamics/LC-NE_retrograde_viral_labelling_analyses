@@ -67,12 +67,41 @@ Written by the notebooks themselves:
 - One HTML rendering per notebook (produced by `jupyter nbconvert` in
   [run](run)).
 
+Figure 2, panel f: LC-NE projections are spatially organized
+This capsule produces panel f of manuscript Figure 2. 
+
+Panel	Published file	Source file
+2f	coronal plot from /results/plots/ctx_sp_coronal_contours_bitmap_mesh.pdf from notebook 5
+2f sagittal plot from /results/plots/ctx_sp_sagittal_right_contours_bitmap_mesh.pdf from notebook 5
+
+Figure S5: LC-NE projections measured with MAPseq and BARseq
+This capsule produces four panels of manuscript Figure S5.
+
+Panel	Published file	Source file 
+S5c	BARseq sagittal Dbh, Th and Slc18a2 gene read plots from /results/plots/{gene}_expression_sagittal_left_bitmap_mesh.pdf and /results/plots/{gene}_expression_sagittal_right_bitmap_mesh.pdf	from notebook H2B-LC_meshes_MAPseq_data
+S5d	coronal plots from /results/plots/BARseq_batch_coronal_plot_bitmap_mesh.pdf from notebook H2B-LC_meshes_MAPseq_data
+S5d	sagittal plots from /results/plots/BARseq_batch_sagittal_left_plot_bitmap_mesh.pdf and /results/plots/BARseq_batch_sagittal_right_plot_bitmap_mesh.pdf from notebook H2B-LC_meshes_MAPseq_data
+S5h	MAPseq coronal plot from /results/plots/MAPseq_coronal_plot_bitmap_mesh.pdf from notebook H2B-LC_meshes_MAPseq_data
+S5h	MAPseq sagittal plot from /results/plots/MAPseq_sagittal_right_plot_bitmap_mesh.pdf and /results/plots/MAPseq_sagittal_left_plot_bitmap_mesh.pdf from notebook H2B-LC_meshes_MAPseq_data
+
+Figure S7: : Retrograde tracing to quantify locations of somata with projections to olfactory bulb, frontal cortex, thalamus,
+periaqueductal gray, cerebellar cortex, or spinal cord
+This capsule produces five panels of manuscript Figure S7.
+
+Panel	Published file	Source file 
+S7c	retrogradely labelled cell count plots from /results/plots/ipsi_contra_cell_counts_per_region_barplot.pdf from notebook 2
+S7d	retrogradely labelled cell density plots from /results/plots/density_ML-DV_viridis_ipsi.pdf and /results/plots/density_ML-DV_viridis_contra.pdf from notebook 2
+S7f	coronal plots from /results/plots/all_retro_coronal_plot_with_histograms_bitmap_mesh.pdf from notebook 5
+S7g	left sagittal plot from /results/plots/all_retro_sagittal_left_plot_with_histograms_bitmap_mesh.pdf from notebook 5
+S7h	right sagittal plot from /results/plots/all_retro_sagittal_right_plot_with_histograms_bitmap_mesh.pdf from notebook 5
+Other Figure S7 panels are not produced here: S5a are hand-drawn schematic, and the remaining panels come from smartSPIM pipeline microscopy images rendered in FIJI.
+
 ## 4. Coordinate and laterality conventions
 
 - Per-brain CSV columns `x, y, z` are renamed to `ML, DV, RC` (CCF voxel
   indices) in notebooks 2–6.
 - Notebook 4 converts voxel indices to microns by multiplying `ML, DV, RC` by
-  `ccf.resolution` from `vta.utils.CCF`.
+  `ccf.resolution`.
 - Hemisphere assignment uses an approximate CCF midline of `ML = 230` voxels:
   `ipsi = ML > 230`. The cut-off is hard-coded.
 
