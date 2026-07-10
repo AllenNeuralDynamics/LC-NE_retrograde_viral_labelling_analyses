@@ -1,0 +1,7 @@
+# Dependencies for the SEPARATE metadata environment (/opt/meta-env), used only by
+# code/build_soma_table_asset.py to emit the standalone soma-table asset's data_description.json
+# + processing.json (issue #26).
+#
+# aind-data-schema is a current release and is kept in its own env so it cannot conflict with the
+# pinned analysis environment (Dockerfile) that the notebooks run in.
+aind-data-schema==2.8.0
