@@ -53,6 +53,10 @@ jupyter nbconvert \
 	--execute notebooks/H2B-LC_meshes_MAPseq_data.ipynb
 python validation/validate_nb6.py || VALIDATION_FAILED=1   # TEMP (validation harness)
 
+# Organize figures: copy the published manuscript panels into results/paper_figures/ (named by
+# panel) and everything else into results/other_figures/, leaving results/plots/ as the raw output.
+python organize_paper_figures.py
+
 # TEMP (validation harness): fail the run if any notebook's outputs diverged.
 if [ "${VALIDATION_FAILED}" -ne 0 ]; then
 	echo "VALIDATION FAILED -- see /results/validation/*_report.md"
