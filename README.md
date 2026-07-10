@@ -34,7 +34,7 @@ jupyter nbconvert --to html --execute --ExecutePreprocessor.timeout=-1 \
 
 | Mount path | Used by | Contents |
 |------------|---------|----------|
-| `/data/Dbh-CreAi65_retrograde_soma_manual_proofread_10-14-25/final_results/{brain_id}_registered_pts.csv` | NB 1 | Per-brain manually-proofread, CCF-registered soma coordinates. Columns are loaded as `x, y, z, Location`; only rows with `Location == "inside"` are kept which denotes somata segmented within the PONS CCF mesh, rather than spurios cells detected elsewhere in the specimen. |
+| `/data/LC-NE-Register-Annotations-retrograde-cells_2026-07-08_18-58-48/final_results/{brain_id}_registered_pts.csv` | NB 1 | Per-brain manually-proofread, CCF-registered soma coordinates. Columns are loaded as `x, y, z, Location`; only rows with `Location == "inside"` are kept which denotes somata segmented within the PONS CCF mesh, rather than spurios cells detected elsewhere in the specimen. |
 | `/data/.brainglobe/allen_mouse_25um_v1.2/` | NB 2–6 (via `vta.utils.CCF` / `CCFMesh`) | brainglobe `allen_mouse_25um` atlas: region meshes (`CCFMesh`) and the region-id↔acronym lookup (`CCF`). See note below. |
 | `/data/LC_percentile_meshes_1/percentile_{10..90}.obj`, `new_core_mesh.obj` | NB 5, 6 | LC density-percentile shell meshes generated from Dbh-Cre;H2B-GFP animals and defining anatomically and functionally correct LC location within the CCF|
 | `/data/BARseq-MAPseq-LC-NE-combined_2026-06-17_03-12-50/other_results/BARseq_780345-780346_combined/cell_top_projections_with_coords.csv` | NB 6 | MAPseq cell coordinates + top projection labels |
