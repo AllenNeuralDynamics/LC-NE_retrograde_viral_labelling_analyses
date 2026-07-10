@@ -7,6 +7,10 @@ SmartSPIM pipeline. This capsule starts from per-brain CCF-registered soma
 coordinates that have been manually proofread, and ends with the count,
 density, 3D-position, statistical, and mesh-overlay figures used in the paper.
 
+**GitHub:** https://github.com/AllenNeuralDynamics/LC-NE_retrograde_viral_labelling_analyses
+
+**Code Ocean:** https://codeocean.allenneuraldynamics.org/capsule/6186140
+
 ---
 
 ## 1. Pipeline overview
@@ -140,7 +144,3 @@ VSIX, etc.) is handled by [postInstall](postInstall).
 ### Notes
 
  - [brainglobe-atlasapi documentation](https://brainglobe.info/documentation/brainglobe-atlasapi/index.html)
-
- ### Links
- GitHub: https://github.com/AllenNeuralDynamics/LC-NE_retrograde_viral_labelling_analyses
- CodeOcean: TBD
