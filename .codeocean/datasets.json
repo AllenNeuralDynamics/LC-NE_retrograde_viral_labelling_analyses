@@ -2,6 +2,10 @@
 	"version": 1,
 	"attached_datasets": [
 		{
+			"id": "299fd5aa-1454-4b7a-968c-1e7d2c570d27",
+			"mount": "LC_percentile_meshes_2026-07-10_21-13-43"
+		},
+		{
 			"id": "32b50e14-234c-434e-a9de-47c25571bc85",
 			"mount": "BARseq-MAPseq-LC-NE-combined_2026-06-17_03-12-50"
 		},
