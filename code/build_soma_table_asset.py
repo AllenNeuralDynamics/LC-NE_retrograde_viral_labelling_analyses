@@ -12,7 +12,7 @@ license, institution, modalities) from the parent retrograde asset's mounted dat
 creation_time, and data_summary. processing.json records this capsule's git commit as provenance,
 so no Code Ocean API credentials are needed.
 
-Runs in the separate /opt/meta-env (which has aind-data-schema), not the analysis env.
+Requires aind-data-schema, which is installed in the capsule environment (see environment/Dockerfile).
 """
 from __future__ import annotations
 

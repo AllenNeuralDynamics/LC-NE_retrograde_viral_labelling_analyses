@@ -58,9 +58,9 @@ python validation/validate_nb6.py || VALIDATION_FAILED=1   # TEMP (validation ha
 python organize_paper_figures.py
 
 # Package notebook 1's compiled soma table as a standalone data asset under results/<ASSET_NAME>/
-# (CSV + AIND data_description.json + processing.json + README), using the separate /opt/meta-env
-# (aind-data-schema). Save that subfolder as a Code Ocean data asset for downstream consumers.
-/opt/meta-env/bin/python build_soma_table_asset.py
+# (CSV + AIND data_description.json + processing.json + README). Save that subfolder as a Code
+# Ocean data asset for downstream consumers.
+python build_soma_table_asset.py
 
 # TEMP (validation harness): fail the run if any notebook's outputs diverged.
 if [ "${VALIDATION_FAILED}" -ne 0 ]; then

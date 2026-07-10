@@ -10,8 +10,11 @@ COPY git-ask-pass /
 
 # Packages the code imports, pinned to specific versions. Transitive
 # dependencies are left to the resolver (top-level pins only). The CCF region
-# lookup uses brainglobe-atlasapi, reading the mounted .brainglobe atlas.
+# lookup uses brainglobe-atlasapi, reading the mounted .brainglobe atlas;
+# aind-data-schema is used by code/build_soma_table_asset.py to write the
+# soma-table asset's AIND metadata.
 RUN pip install --no-cache-dir \
+    aind-data-schema==2.8.0 \
     brainglobe-atlasapi==2.1.0 \
     ipywidgets==8.0.7 \
     k3d==2.17.0 \
@@ -25,14 +28,6 @@ RUN pip install --no-cache-dir \
     scipy==1.10.1 \
     seaborn==0.13.2 \
     trimesh==4.11.5
-
-# Separate metadata environment: aind-data-schema (a current release) is used only by
-# code/build_soma_table_asset.py to emit the standalone soma-table asset's data_description.json
-# + processing.json. Isolated in /opt/meta-env (Python venv) so it cannot conflict with the
-# pinned analysis packages above.
-COPY metadata-requirements.txt /metadata-requirements.txt
-RUN python3 -m venv /opt/meta-env && \
-    /opt/meta-env/bin/pip install --no-cache-dir -r /metadata-requirements.txt
 
 COPY postInstall /
 RUN /postInstall
