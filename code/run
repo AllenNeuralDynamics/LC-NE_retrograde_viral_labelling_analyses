@@ -3,6 +3,19 @@ set -euxo pipefail
 cd /code
 # This is the master script for the capsule. When you click "Reproducible Run", the code in this file will execute.
 
+# Name of the standalone soma-table asset that build_soma_table_asset.py writes to
+# results/$ASSET_NAME/. Dated by default (AIND convention) so each run mints a distinct asset;
+# exported so the --metadata (first) and --csv (last) invocations agree on the folder. Override
+# by setting ASSET_NAME before the run.
+export ASSET_NAME="${ASSET_NAME:-LC-NE_retrograde_soma_table_$(date -u +%Y-%m-%d_%H-%M-%S)}"
+
+# Write the soma-table asset's AIND metadata (data_description.json + processing.json + README)
+# into results/$ASSET_NAME/ FIRST, before the ~1.5h notebook run. The metadata does not read any
+# notebook output, so a missing "Code Ocean API Credentials" secret surfaces here in seconds
+# (processing.json skipped with a warning) instead of after the full run. The CSV is copied in at
+# the end by the --csv call below, once notebook 1 has produced it.
+python build_soma_table_asset.py --metadata
+
 # TEMP (validation harness): track validation failures without aborting the run.
 # Each notebook is validated against the frozen reference asset right after it
 # runs (see code/validation/). A failing validator records a flag but lets the
@@ -57,10 +70,10 @@ python validation/validate_nb6.py || VALIDATION_FAILED=1   # TEMP (validation ha
 # panel) and everything else into results/other_figures/, leaving results/plots/ as the raw output.
 python organize_paper_figures.py
 
-# Package notebook 1's compiled soma table as a standalone data asset under results/<ASSET_NAME>/
-# (CSV + AIND data_description.json + processing.json + README). Save that subfolder as a Code
-# Ocean data asset for downstream consumers.
-python build_soma_table_asset.py
+# Copy notebook 1's compiled soma table into the asset folder results/$ASSET_NAME/ (its metadata
+# + README were written up front). Save that subfolder as a Code Ocean data asset for downstream
+# consumers.
+python build_soma_table_asset.py --csv
 
 # TEMP (validation harness): fail the run if any notebook's outputs diverged.
 if [ "${VALIDATION_FAILED}" -ne 0 ]; then
