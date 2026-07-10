@@ -7,6 +7,10 @@ SmartSPIM pipeline. This capsule starts from per-brain CCF-registered soma
 coordinates that have been manually proofread, and ends with the count,
 density, 3D-position, statistical, and mesh-overlay figures used in the paper.
 
+**GitHub:** https://github.com/AllenNeuralDynamics/LC-NE_retrograde_viral_labelling_analyses
+
+**Code Ocean:** https://codeocean.allenneuraldynamics.org/capsule/6186140
+
 ---
 
 ## 1. Pipeline overview
@@ -14,13 +18,13 @@ density, 3D-position, statistical, and mesh-overlay figures used in the paper.
 The capsule runs six notebooks in order (see [run](run)), each rendered to
 HTML in `/results`:
 
-| # | Notebook | Purpose |Additonal notes
+| # | Notebook | Purpose |Additional notes
 |---|----------|---------|
 | 1 | [FINAL_1_csv_compile_df_manually_proofed_Ai65.ipynb](FINAL_1_csv_compile_df_manually_proofed_Ai65.ipynb) | Compile per-brain manually-proofread CCF coordinate CSVs into a single dataframe | Input data is extracted from outputs of the LC-NE_Register_Annotations_retrograde_cells capsule |
 | 2 | [FINAL_2_manually_proofed_Ai65_plot_counts_densities.ipynb](FINAL_2_manually_proofed_Ai65_plot_counts_densities.ipynb) | Per-region / per-hemisphere LC-NE cell counts and density plots |
 | 3 | [FINAL_3_manually_proofed_Ai65_3Dplot_somata_positions_byROI.ipynb](FINAL_3_manually_proofed_Ai65_3Dplot_somata_positions_byROI.ipynb) | Interactive 3D `k3d` plots of soma positions in CCF, coloured by injection ROI | Currently NOT USED for the figures included in the manuscript|
 | 4 | [FINAL_4_manually_proofed_Ai65_stats_regression.ipynb](FINAL_4_manually_proofed_Ai65_stats_regression.ipynb) | PCA, LDA, logistic-regression / random-forest / Gaussian-process classifiers, pairwise post-hoc statistics | Currently NOT USED for the figures included in the manuscript|
-| 5 | [FINAL_5_manually_proofed_AI65_meshes_plots_H2B-LC.ipynb](FINAL_5_manually_proofed_AI65_meshes_plots_H2B-LC.ipynb) | Coronal/sagittal projections of retrogradely labelled somata  somata over LC percentile-density meshes | 
+| 5 | [FINAL_5_manually_proofed_AI65_meshes_plots_H2B-LC.ipynb](FINAL_5_manually_proofed_AI65_meshes_plots_H2B-LC.ipynb) | Coronal/sagittal projections of retrogradely labelled somata over LC percentile-density meshes | 
 | 6 | [H2B-LC_meshes_MAPseq_data.ipynb](H2B-LC_meshes_MAPseq_data.ipynb) | Same mesh framework applied to MAPseq and BARseq soma coordinates, plus per-gene (Dbh / Th / Slc18a2) expression overlays | Input data is extracted from outputs of the LC-NE_BARseq_MAPseq_analyses capsule |
 
 The reproducible run is driven by [run](run):
@@ -58,43 +62,45 @@ jupyter nbconvert --to html --execute --ExecutePreprocessor.timeout=-1 \
 
 Written by the notebooks themselves:
 
-- `FINAL_manual_proofread_ccf_37brains.csv` — unified soma table (NB 1).
-- `pairwise_posthoc_results.csv` — pairwise post-hoc statistical comparisons (NB 4).
-- `plots/` — PDF + SVG figures from NB 2, 5, 6 (counts/density bar plots,
+- `FINAL_manual_proofread_ccf_37brains.csv`: unified soma table (NB 1).
+- `pairwise_posthoc_results.csv`: pairwise post-hoc statistical comparisons (NB 4).
+- `plots/`: PDF + SVG figures from NB 2, 5, 6 (counts/density bar plots,
   coronal/sagittal mesh overlays for retro, MAPseq, BARseq, and
   per-gene expression plots) and the random-forest confusion-matrix figures
   from NB 4.
 - One HTML rendering per notebook (produced by `jupyter nbconvert` in
   [run](run)).
 
-Figure 2, panel f: LC-NE projections are spatially organized
-This capsule produces panel f of manuscript Figure 2. 
+### Manuscript figure panels
 
-Panel	Published file	Source file
-2f	coronal plot from /results/plots/ctx_sp_coronal_contours_bitmap_mesh.pdf from notebook 5
-2f sagittal plot from /results/plots/ctx_sp_sagittal_right_contours_bitmap_mesh.pdf from notebook 5
+The published panels this capsule produces (all written to `results/plots/`):
 
-Figure S5: LC-NE projections measured with MAPseq and BARseq
-This capsule produces four panels of manuscript Figure S5.
+**Figure 2f** (LC-NE projections are spatially organized; NB 5):
 
-Panel	Published file	Source file 
-S5c	BARseq sagittal Dbh, Th and Slc18a2 gene read plots from /results/plots/{gene}_expression_sagittal_left_bitmap_mesh.pdf and /results/plots/{gene}_expression_sagittal_right_bitmap_mesh.pdf	from notebook H2B-LC_meshes_MAPseq_data
-S5d	coronal plots from /results/plots/BARseq_batch_coronal_plot_bitmap_mesh.pdf from notebook H2B-LC_meshes_MAPseq_data
-S5d	sagittal plots from /results/plots/BARseq_batch_sagittal_left_plot_bitmap_mesh.pdf and /results/plots/BARseq_batch_sagittal_right_plot_bitmap_mesh.pdf from notebook H2B-LC_meshes_MAPseq_data
-S5h	MAPseq coronal plot from /results/plots/MAPseq_coronal_plot_bitmap_mesh.pdf from notebook H2B-LC_meshes_MAPseq_data
-S5h	MAPseq sagittal plot from /results/plots/MAPseq_sagittal_right_plot_bitmap_mesh.pdf and /results/plots/MAPseq_sagittal_left_plot_bitmap_mesh.pdf from notebook H2B-LC_meshes_MAPseq_data
+| Panel | File in `results/plots/` |
+|---|---|
+| 2f (coronal) | `ctx_sp_coronal_contours_bitmap_mesh.pdf` |
+| 2f (sagittal) | `ctx_sp_sagittal_right_contours_bitmap_mesh.pdf` |
 
-Figure S7: : Retrograde tracing to quantify locations of somata with projections to olfactory bulb, frontal cortex, thalamus,
-periaqueductal gray, cerebellar cortex, or spinal cord
-This capsule produces five panels of manuscript Figure S7.
+**Figure S5** (LC-NE projections measured with MAPseq and BARseq; NB 6, `H2B-LC_meshes_MAPseq_data`):
 
-Panel	Published file	Source file 
-S7c	retrogradely labelled cell count plots from /results/plots/ipsi_contra_cell_counts_per_region_barplot.pdf from notebook 2
-S7d	retrogradely labelled cell density plots from /results/plots/density_ML-DV_viridis_ipsi.pdf and /results/plots/density_ML-DV_viridis_contra.pdf from notebook 2
-S7f	coronal plots from /results/plots/all_retro_coronal_plot_with_histograms_bitmap_mesh.pdf from notebook 5
-S7g	left sagittal plot from /results/plots/all_retro_sagittal_left_plot_with_histograms_bitmap_mesh.pdf from notebook 5
-S7h	right sagittal plot from /results/plots/all_retro_sagittal_right_plot_with_histograms_bitmap_mesh.pdf from notebook 5
-Other Figure S7 panels are not produced here: S5a are hand-drawn schematic, and the remaining panels come from smartSPIM pipeline microscopy images rendered in FIJI.
+| Panel | File(s) in `results/plots/` |
+|---|---|
+| S5c | `{gene}_expression_sagittal_left_bitmap_mesh.pdf`, `{gene}_expression_sagittal_right_bitmap_mesh.pdf` (gene = Dbh, Th, Slc18a2) |
+| S5d | `BARseq_batch_coronal_plot_bitmap_mesh.pdf`, `BARseq_batch_sagittal_left_plot_bitmap_mesh.pdf`, `BARseq_batch_sagittal_right_plot_bitmap_mesh.pdf` |
+| S5h | `MAPseq_coronal_plot_bitmap_mesh.pdf`, `MAPseq_sagittal_left_plot_bitmap_mesh.pdf`, `MAPseq_sagittal_right_plot_bitmap_mesh.pdf` |
+
+**Figure S7** (retrograde tracing quantifying somata locations by projection target):
+
+| Panel | File(s) in `results/plots/` | Notebook |
+|---|---|---|
+| S7c | `ipsi_contra_cell_counts_per_region_barplot.pdf` | NB 2 |
+| S7d | `density_ML-DV_viridis_ipsi.pdf`, `density_ML-DV_viridis_contra.pdf` | NB 2 |
+| S7f | `all_retro_coronal_plot_with_histograms_bitmap_mesh.pdf` | NB 5 |
+| S7g | `all_retro_sagittal_left_plot_with_histograms_bitmap_mesh.pdf` | NB 5 |
+| S7h | `all_retro_sagittal_right_plot_with_histograms_bitmap_mesh.pdf` | NB 5 |
+
+Other Figure S7 panels are not produced here: S7a is a hand-drawn schematic, and the remaining panels come from SmartSPIM microscopy images rendered in FIJI.
 
 ## 4. Coordinate and laterality conventions
 
@@ -112,7 +118,7 @@ Other Figure S7 panels are not produced here: S5a are hand-drawn schematic, and 
 - Classifiers compared on the same feature set:
   - Logistic regression
   - Random forest
-  - Gaussian-process classifier (RBF kernel) — loaded from the
+  - Gaussian-process classifier (RBF kernel): loaded from the
     `gp_classification_results.pkl` asset if available, otherwise retrained
     and re-pickled.
 - Stratified k-fold cross-validation, classification reports, and normalized
@@ -138,7 +144,3 @@ VSIX, etc.) is handled by [postInstall](postInstall).
 ### Notes
 
  - [brainglobe-atlasapi documentation](https://brainglobe.info/documentation/brainglobe-atlasapi/index.html)
-
- ### Links
- GitHub: https://github.com/AllenNeuralDynamics/LC-NE_retrograde_viral_labelling_analyses
- CodeOcean: TBD
