@@ -18,8 +18,8 @@ density, 3D-position, statistical, and mesh-overlay figures used in the paper.
 The capsule runs six notebooks in order (see [run](run)), each rendered to
 HTML in `/results`:
 
-| # | Notebook | Purpose |Additional notes
-|---|----------|---------|
+| # | Notebook | Purpose | Additional notes |
+|---|----------|---------|------------------|
 | 1 | [FINAL_1_csv_compile_df_manually_proofed_Ai65.ipynb](FINAL_1_csv_compile_df_manually_proofed_Ai65.ipynb) | Compile per-brain manually-proofread CCF coordinate CSVs into a single dataframe | Input data is extracted from outputs of the LC-NE_Register_Annotations_retrograde_cells capsule |
 | 2 | [FINAL_2_manually_proofed_Ai65_plot_counts_densities.ipynb](FINAL_2_manually_proofed_Ai65_plot_counts_densities.ipynb) | Per-region / per-hemisphere LC-NE cell counts and density plots |
 | 3 | [FINAL_3_manually_proofed_Ai65_3Dplot_somata_positions_byROI.ipynb](FINAL_3_manually_proofed_Ai65_3Dplot_somata_positions_byROI.ipynb) | Interactive 3D `k3d` plots of soma positions in CCF, coloured by injection ROI | Currently NOT USED for the figures included in the manuscript|
