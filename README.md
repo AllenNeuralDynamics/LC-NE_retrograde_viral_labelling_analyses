@@ -18,8 +18,8 @@ density, 3D-position, statistical, and mesh-overlay figures used in the paper.
 The capsule runs six notebooks in order (see [run](run)), each rendered to
 HTML in `/results`:
 
-| # | Notebook | Purpose |Additional notes
-|---|----------|---------|
+| # | Notebook | Purpose | Additional notes |
+|---|----------|---------|------------------|
 | 1 | [FINAL_1_csv_compile_df_manually_proofed_Ai65.ipynb](FINAL_1_csv_compile_df_manually_proofed_Ai65.ipynb) | Compile per-brain manually-proofread CCF coordinate CSVs into a single dataframe | Input data is extracted from outputs of the LC-NE_Register_Annotations_retrograde_cells capsule |
 | 2 | [FINAL_2_manually_proofed_Ai65_plot_counts_densities.ipynb](FINAL_2_manually_proofed_Ai65_plot_counts_densities.ipynb) | Per-region / per-hemisphere LC-NE cell counts and density plots |
 | 3 | [FINAL_3_manually_proofed_Ai65_3Dplot_somata_positions_byROI.ipynb](FINAL_3_manually_proofed_Ai65_3Dplot_somata_positions_byROI.ipynb) | Interactive 3D `k3d` plots of soma positions in CCF, coloured by injection ROI | Currently NOT USED for the figures included in the manuscript|
@@ -40,7 +40,7 @@ jupyter nbconvert --to html --execute --ExecutePreprocessor.timeout=-1 \
 |------------|---------|----------|
 | `/data/LC-NE-Register-Annotations-retrograde-cells_2026-07-08_18-58-48/final_results/{brain_id}_registered_pts.csv` | NB 1 | Per-brain manually-proofread, CCF-registered soma coordinates. Columns are loaded as `x, y, z, Location`; only rows with `Location == "inside"` are kept which denotes somata segmented within the PONS CCF mesh, rather than spurios cells detected elsewhere in the specimen. |
 | `/data/.brainglobe/allen_mouse_25um_v1.2/` | NB 2–6 (via `vta.utils.CCF` / `CCFMesh`) | brainglobe `allen_mouse_25um` atlas: region meshes (`CCFMesh`) and the region-id↔acronym lookup (`CCF`). See note below. |
-| `/data/LC_percentile_meshes_1/percentile_{10..90}.obj`, `new_core_mesh.obj` | NB 5, 6 | LC density-percentile shell meshes generated from Dbh-Cre;H2B-GFP animals and defining anatomically and functionally correct LC location within the CCF|
+| `/data/LC_percentile_meshes_2026-07-10_21-13-43/percentile_{10..90}.obj`, `core_mesh.obj` | NB 5, 6 | LC density-percentile shell meshes generated from Dbh-Cre;H2B-GFP animals and defining anatomically and functionally correct LC location within the CCF|
 | `/data/BARseq-MAPseq-LC-NE-combined_2026-06-17_03-12-50/other_results/BARseq_780345-780346_combined/cell_top_projections_with_coords.csv` | NB 6 | MAPseq cell coordinates + top projection labels |
 | `/data/BARseq-MAPseq-LC-NE-combined_2026-06-17_03-12-50/other_results/BARseq_780345-780346_combined/fromLCNE_combined_LCcluster_neurons_CCFv2_uid_cpm_log_clust_colData.csv` | NB 6 | BARseq cell coordinates + cluster labels |
 | `/data/BARseq-MAPseq-LC-NE-combined_2026-06-17_03-12-50/other_results/BARseq_780345-780346_combined/Dbh_Th_Slc18a2_logcounts_adj_Dbh.csv` | NB 6 | Per-cell log-counts for `Dbh`, `Th`, `Slc18a2` used for gene-expression overlays |
