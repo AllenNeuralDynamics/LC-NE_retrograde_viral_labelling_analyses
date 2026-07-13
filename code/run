@@ -16,55 +16,41 @@ export ASSET_NAME="${ASSET_NAME:-LC-NE_retrograde_soma_table_$(date -u +%Y-%m-%d
 # the end by the --csv call below, once notebook 1 has produced it.
 python build_soma_table_asset.py --metadata
 
-# TEMP (validation harness): track validation failures without aborting the run.
-# Each notebook is validated against the frozen reference asset right after it
-# runs (see code/validation/). A failing validator records a flag but lets the
-# remaining notebooks run, so one run produces every report; the run then exits
-# non-zero at the end if anything diverged. Remove this block and the
-# `validate_*` lines (and the `code/validation/` folder) in the final PR.
-VALIDATION_FAILED=0
-
 jupyter nbconvert \
 	--to 'html' \
 	--ExecutePreprocessor.timeout=-1 \
 	--FilesWriter.build_directory=../results \
 	--execute notebooks/FINAL_1_csv_compile_df_manually_proofed_Ai65.ipynb
-python validation/validate_nb1.py || VALIDATION_FAILED=1   # TEMP (validation harness)
 
 jupyter nbconvert \
 	--to 'html' \
 	--ExecutePreprocessor.timeout=-1 \
 	--FilesWriter.build_directory=../results \
 	--execute notebooks/FINAL_2_manually_proofed_Ai65_plot_counts_densities.ipynb
-python validation/validate_nb2.py || VALIDATION_FAILED=1   # TEMP (validation harness)
 
 jupyter nbconvert \
 	--to 'html' \
 	--ExecutePreprocessor.timeout=-1 \
 	--FilesWriter.build_directory=../results \
 	--execute notebooks/FINAL_3_manually_proofed_Ai65_3Dplot_somata_positions_byROI.ipynb
-python validation/validate_nb3.py || VALIDATION_FAILED=1   # TEMP (validation harness)
 
 jupyter nbconvert \
 	--to 'html' \
 	--ExecutePreprocessor.timeout=-1 \
 	--FilesWriter.build_directory=../results \
 	--execute notebooks/FINAL_4_manually_proofed_Ai65_stats_regression.ipynb
-python validation/validate_nb4.py || VALIDATION_FAILED=1   # TEMP (validation harness)
 
 jupyter nbconvert \
 	--to 'html' \
 	--ExecutePreprocessor.timeout=-1 \
 	--FilesWriter.build_directory=../results \
 	--execute notebooks/FINAL_5_manually_proofed_AI65_meshes_plots_H2B-LC.ipynb
-python validation/validate_nb5.py || VALIDATION_FAILED=1   # TEMP (validation harness)
 
 jupyter nbconvert \
 	--to 'html' \
 	--ExecutePreprocessor.timeout=-1 \
 	--FilesWriter.build_directory=../results \
 	--execute notebooks/H2B-LC_meshes_MAPseq_data.ipynb
-python validation/validate_nb6.py || VALIDATION_FAILED=1   # TEMP (validation harness)
 
 # Organize figures: copy the published manuscript panels into results/paper_figures/ (named by
 # panel) and everything else into results/other_figures/, leaving results/plots/ as the raw output.
@@ -74,9 +60,3 @@ python organize_paper_figures.py
 # + README were written up front). Save that subfolder as a Code Ocean data asset for downstream
 # consumers.
 python build_soma_table_asset.py --csv
-
-# TEMP (validation harness): fail the run if any notebook's outputs diverged.
-if [ "${VALIDATION_FAILED}" -ne 0 ]; then
-	echo "VALIDATION FAILED -- see /results/validation/*_report.md"
-	exit 1
-fi
