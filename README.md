@@ -11,6 +11,7 @@ density, 3D-position, statistical, and mesh-overlay figures used in the paper.
 
 **Code Ocean:** https://codeocean.allenneuraldynamics.org/capsule/6186140
 
+**Manuscript:** https://www.biorxiv.org/content/10.64898/2026.04.10.717727v1.full.pdf
 ---
 
 ## 1. Pipeline overview
